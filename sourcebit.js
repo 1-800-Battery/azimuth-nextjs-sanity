@@ -14,7 +14,7 @@ module.exports = {
                 projectId: process.env.SANITY_PROJECT_ID,
                 dataset: process.env.SANITY_DATASET,
                 isPreview: isDev,
-                watch: isDev
+                watch: true
             }
         },
         // Following plugin is defined by single transform function that
@@ -38,7 +38,7 @@ module.exports = {
         {
             module: require('sourcebit-target-next'),
             options: {
-                liveUpdate: isDev,
+                liveUpdate: true,
                 pages: [
                     { path: '/{slug}', predicate: _.matchesProperty('_type', 'landing') },
                     { path: '/{slug}', predicate: _.matchesProperty('_type', 'page') },
