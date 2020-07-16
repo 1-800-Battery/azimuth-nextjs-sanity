@@ -3,8 +3,7 @@ const mapDeep = require('./src/utils/map-deep');
 
 
 const isDev = process.env.NODE_ENV === 'development';
-
-console.log("YESY",process.env.SANITY_PROJECT_ID);
+ 
 module.exports = {
     plugins: [
         {
@@ -14,7 +13,8 @@ module.exports = {
                 projectId: process.env.SANITY_PROJECT_ID,
                 dataset: process.env.SANITY_DATASET,
                 isPreview: isDev,
-                watch: true
+                watch: isDev,
+                useCdn: !isDev
             }
         },
         // Following plugin is defined by single transform function that
@@ -38,7 +38,7 @@ module.exports = {
         {
             module: require('sourcebit-target-next'),
             options: {
-                liveUpdate: true,
+                liveUpdate: isDev,
                 pages: [
                     { path: '/{slug}', predicate: _.matchesProperty('_type', 'landing') },
                     { path: '/{slug}', predicate: _.matchesProperty('_type', 'page') },
