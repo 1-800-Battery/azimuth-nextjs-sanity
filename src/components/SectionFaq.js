@@ -3,11 +3,28 @@ import _ from 'lodash';
 
 import { markdownify } from '../utils';
 
+const { GGScript } = require("ggscript");
 
 export default class SectionFaq extends React.Component {
 
-    componentDidMount() {
+    async componentDidMount() {
         // Accordion
+
+          await GGScript("public/js/plugins.js");  // Plugin Works   -  Original use of Import Kills document
+        const accordions = document.querySelectorAll('.faq-accordion');
+        console.log( "accordions");
+
+
+        Array.from(accordions).forEach((accordion) => {
+
+            new BadgerAccordion(accordion, {
+                headerClass: '.accordion-trigger',
+                panelClass: '.accordion-panel',
+                panelInnerClass: '.accordion-content',
+                openMultiplePanels: true
+            });
+        });
+
         const accordions = document.querySelectorAll('.faq-accordion');
         Array.from(accordions).forEach((accordion) => {
             new BadgerAccordion(accordion, {
